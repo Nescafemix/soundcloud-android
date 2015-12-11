@@ -1,0 +1,75 @@
+<!-- TODO: Add ScrollView -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.brianuosseph.soundcloudapp.AccountFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#eeeeee"
+        android:layout_marginTop="@dimen/account_section_margin">
+
+        <!-- TODO: Add user profile section and link to ProfileActivity -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/account_section_margin"
+            android:background="@drawable/linear_layout_look">
+            <Button
+                style="@style/AccountButton"
+                android:text="Explore"/>
+            <Button
+                style="@style/AccountButton"
+                android:text="Activity"/>
+            <Button
+                style="@style/AccountButton"
+                android:text="Record"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/account_section_margin">
+            <Button
+                style="@style/AccountButton"
+                android:text="Notification Settings"/>
+            <Button
+                style="@style/AccountButton"
+                android:text="Basic Settings"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/account_section_margin">
+            <Button
+                style="@style/AccountButton"
+                android:text="Help Center"/>
+            <Button
+                style="@style/AccountButton"
+                android:text="Legal"/>
+        </LinearLayout>
+
+        <Button
+            style="@style/AccountButton"
+            android:text="@string/account_sign_out"
+            android:id="@+id/sign_out_button"
+            android:layout_marginBottom="@dimen/account_section_margin" />
+
+        <!-- TODO: Debug, figure out why this is cut off in ScrollView -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:id="@+id/app_version"
+            android:gravity="center"
+            android:background="@android:color/holo_green_dark"
+            android:text="App Version 0.1.0"/>
+    </LinearLayout>
+</ScrollView>

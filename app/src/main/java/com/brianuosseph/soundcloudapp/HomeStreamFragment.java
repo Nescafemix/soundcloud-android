@@ -270,15 +270,26 @@ public class HomeStreamFragment extends Fragment {
                         continue;
                 }
 
-                // attributes common in all sounds
+                // Attributes common in all sounds
                 sound.userName = soundJson.getJSONObject("user").getString("username");
                 sound.title = soundJson.getString("title");
                 sound.permalink = soundJson.getString("permalink");
                 sound.artworkUrl = soundJson.getString("artwork_url");
                 sound.duration = soundJson.getLong("duration");
 
+                // TODO: Handle artworkUrl null case
+                // Check for null values and replace with valid type, or find in alternate location
+                if (sound.artworkUrl.equals("null")) {
+                    sound.artworkUrl = "";
+                    Log.d("DEBUG", "changed artworkUrl to empty string");
+                }
+
                 soundBuffer.add(sound);
             }
+        }
+        catch (NullPointerException e) {
+            Log.e("JsonParse", "Null came up!");
+            e.printStackTrace();
         }
         catch (JSONException e) {
             Log.e("JsonParse", "Unable to parse new JSON data");

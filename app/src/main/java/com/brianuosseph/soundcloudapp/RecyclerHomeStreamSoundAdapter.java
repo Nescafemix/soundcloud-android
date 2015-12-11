@@ -2,6 +2,7 @@ package com.brianuosseph.soundcloudapp;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,9 @@ import com.brianuosseph.soundcloudapp.dummy.DummyContent.DummyItem;
 import com.brianuosseph.soundcloudapp.model.Sound;
 import com.brianuosseph.soundcloudapp.model.Track;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 /**
@@ -25,7 +29,6 @@ public class RecyclerHomeStreamSoundAdapter
         extends RecyclerView.Adapter<RecyclerHomeStreamSoundAdapter.ViewHolder>
         implements OnHomeStreamListFragmentInteractionListener {
 
-    // TODO: Debug NullPointerException relating to ImageLoader and Context
     private Context mContext;
     private final OnHomeStreamListFragmentInteractionListener mListener;
     private List<Sound> mSounds;
@@ -65,9 +68,9 @@ public class RecyclerHomeStreamSoundAdapter
         }
 
         // Image
-        holder.mArtworkView.setImageUrl(holder.mSound.artworkUrl, mImageLoader);
         holder.mArtworkView.setDefaultImageResId(R.drawable.sound_artwork_default);
         holder.mArtworkView.setErrorImageResId(R.drawable.sound_artwork_error);
+        holder.mArtworkView.setImageUrl(holder.mSound.artworkUrl, mImageLoader);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +116,21 @@ public class RecyclerHomeStreamSoundAdapter
             mDurationView = (TextView) view.findViewById(R.id.sound_duration);
             mStatusView = (TextView) view.findViewById(R.id.sound_status);
             mArtworkView = (NetworkImageView) view.findViewById(R.id.sound_art);
+        }
+
+        @Override
+        public String toString() {
+            JSONObject json = new JSONObject();
+            try {
+                json.put("username", mUserNameView.getText());
+                json.put("title", mTitleView.getText());
+                json.put("duration", mDurationView.getText());
+            }
+            catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            return json.toString();
         }
     }
 

@@ -47,7 +47,7 @@ public class SessionManager {
 //        editor.putLong(USER_ID_KEY, userId);
 //        editor.putString(USER_NAME_KEY, username);
 //        editor.putString(USER_PERMALINK_KEY, permalink);
-        editor.commit();
+        editor.apply();
     }
 
     public Token getToken() {
@@ -90,6 +90,6 @@ public class SessionManager {
         // Clear all SharedPreferences data
         editor = preferences.edit();
         editor.clear();
-        editor.commit();
+        editor.apply();
     }
 }

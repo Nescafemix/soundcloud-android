@@ -1,75 +1,78 @@
-<!-- TODO: Add ScrollView -->
+<!-- TODO: Debug ScrollView cutting off children views -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.brianuosseph.soundcloudapp.AccountFragment">
+    tools:context=".fragments.AccountFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#eeeeee"
-        android:layout_marginTop="@dimen/account_section_margin">
-
-        <!-- TODO: Add user profile section and link to ProfileActivity -->
+        android:background="#eeeeee">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginBottom="@dimen/account_section_margin"
-            android:background="@drawable/linear_layout_look">
-            <Button
-                style="@style/AccountButton"
-                android:text="Explore"/>
-            <Button
-                style="@style/AccountButton"
-                android:text="Activity"/>
-            <Button
-                style="@style/AccountButton"
-                android:text="Record"/>
+            android:layout_height="96dp"
+            android:paddingTop="@dimen/account_layout_padding"
+            android:paddingBottom="@dimen/account_layout_padding">
+            <!-- TODO: Add user profile section and link to ProfileActivity -->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/account_section_margin">
+            android:paddingBottom="@dimen/account_layout_padding">
             <Button
                 style="@style/AccountButton"
-                android:text="Notification Settings"/>
+                android:text="@string/account_explore"/>
             <Button
                 style="@style/AccountButton"
-                android:text="Basic Settings"/>
+                android:text="@string/account_activity"/>
+            <Button
+                style="@style/AccountButton"
+                android:text="@string/account_record"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="@dimen/account_section_margin">
+            android:paddingBottom="@dimen/account_layout_padding">
             <Button
                 style="@style/AccountButton"
-                android:text="Help Center"/>
+                android:text="@string/account_notify_settings"/>
             <Button
                 style="@style/AccountButton"
-                android:text="Legal"/>
+                android:text="@string/account_basic_settings"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/account_layout_padding">
+            <Button
+                style="@style/AccountButton"
+                android:text="@string/account_help_center"/>
+            <Button
+                style="@style/AccountButton"
+                android:text="@string/account_legal"
+                android:paddingBottom="@dimen/account_button_padding"
+                android:paddingTop="@dimen/account_button_padding" />
         </LinearLayout>
 
         <Button
             style="@style/AccountButton"
             android:text="@string/account_sign_out"
-            android:id="@+id/sign_out_button"
-            android:layout_marginBottom="@dimen/account_section_margin" />
+            android:id="@+id/sign_out_button" />
 
-        <!-- TODO: Debug, figure out why this is cut off in ScrollView -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:id="@+id/app_version"
             android:gravity="center"
-            android:background="@android:color/holo_green_dark"
-            android:text="App Version 0.1.0"/>
+            android:text="@string/app_version"/>
     </LinearLayout>
 </ScrollView>

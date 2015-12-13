@@ -30,9 +30,11 @@ public class NetworkManager {
                 new LruBitmapCache(LruBitmapCache.getCacheSize(mContext)));
     }
 
+    // You can pass either the application or activity context, the correct one is obtained.
     public static synchronized NetworkManager getInstance(Context context) {
         if (mInstance == null) {
-            mInstance = new NetworkManager(context);
+            // For singleton classes, store the application context
+            mInstance = new NetworkManager(context.getApplicationContext());
         }
         return mInstance;
     }

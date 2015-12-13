@@ -1,18 +1,17 @@
-package com.brianuosseph.soundcloudapp;
+package com.brianuosseph.soundcloudapp.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
-import com.brianuosseph.soundcloudapp.HomeStreamFragment.OnHomeStreamListFragmentInteractionListener;
-import com.brianuosseph.soundcloudapp.dummy.DummyContent.DummyItem;
+import com.brianuosseph.soundcloudapp.NetworkManager;
+import com.brianuosseph.soundcloudapp.R;
+import com.brianuosseph.soundcloudapp.fragments.HomeStreamFragment.OnHomeStreamListFragmentInteractionListener;
 import com.brianuosseph.soundcloudapp.model.Sound;
 import com.brianuosseph.soundcloudapp.model.Track;
 

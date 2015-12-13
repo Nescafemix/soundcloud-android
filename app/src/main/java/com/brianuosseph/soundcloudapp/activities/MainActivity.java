@@ -1,4 +1,4 @@
-package com.brianuosseph.soundcloudapp;
+package com.brianuosseph.soundcloudapp.activities;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -19,8 +19,13 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
-import com.brianuosseph.soundcloudapp.AccountFragment.OnAccountInteractionListener;
-import com.brianuosseph.soundcloudapp.HomeStreamFragment.OnHomeStreamListFragmentInteractionListener;
+import com.brianuosseph.soundcloudapp.fragments.AccountFragment;
+import com.brianuosseph.soundcloudapp.fragments.AccountFragment.OnAccountInteractionListener;
+import com.brianuosseph.soundcloudapp.fragments.HomeStreamFragment;
+import com.brianuosseph.soundcloudapp.fragments.HomeStreamFragment.OnHomeStreamListFragmentInteractionListener;
+import com.brianuosseph.soundcloudapp.NetworkManager;
+import com.brianuosseph.soundcloudapp.R;
+import com.brianuosseph.soundcloudapp.SessionManager;
 import com.brianuosseph.soundcloudapp.model.Sound;
 import com.soundcloud.api.ApiWrapper;
 
@@ -185,7 +190,7 @@ public class MainActivity extends AppCompatActivity
                 case 0:
                     return HomeStreamFragment.newInstance();
                 case 3:
-                    return AccountFragment.newInstance("hello", "world");
+                    return AccountFragment.newInstance();
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
             }

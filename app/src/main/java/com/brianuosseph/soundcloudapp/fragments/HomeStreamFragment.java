@@ -1,4 +1,4 @@
-package com.brianuosseph.soundcloudapp;
+package com.brianuosseph.soundcloudapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -16,6 +16,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.brianuosseph.soundcloudapp.EndlessRecyclerViewScrollListener;
+import com.brianuosseph.soundcloudapp.NetworkManager;
+import com.brianuosseph.soundcloudapp.R;
+import com.brianuosseph.soundcloudapp.adapters.RecyclerHomeStreamSoundAdapter;
+import com.brianuosseph.soundcloudapp.SessionManager;
+import com.brianuosseph.soundcloudapp.activities.MainActivity;
 import com.brianuosseph.soundcloudapp.model.Playlist;
 import com.brianuosseph.soundcloudapp.model.Sound;
 import com.brianuosseph.soundcloudapp.model.Track;
@@ -36,7 +42,7 @@ import java.util.List;
 public class HomeStreamFragment extends Fragment {
     private SessionManager session;
     private OnHomeStreamListFragmentInteractionListener mListener;
-    private int pageSize = 15;
+    private int pageSize = 20;
     private String nextPageLink;
     private String updatedListLink;
     private List<Sound> mSounds;
@@ -46,7 +52,7 @@ public class HomeStreamFragment extends Fragment {
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager; // RecyclerView.LayoutManager
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -64,8 +70,7 @@ public class HomeStreamFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mImageLoader = NetworkManager.getInstance(getActivity().getApplicationContext())
-                .getImageLoader();
+        mImageLoader = NetworkManager.getInstance(getActivity()).getImageLoader();
     }
 
     @Override
@@ -80,9 +85,6 @@ public class HomeStreamFragment extends Fragment {
         mSwipeRefreshLayout = (SwipeRefreshLayout) view;
         mRecyclerView = (RecyclerView) view.findViewById(R.id.home_stream_list);
 
-        // Layout size does not change; this will improve performance
-        mRecyclerView.setHasFixedSize(true);
-
         // Set the layout manager
         mLayoutManager = new LinearLayoutManager(context);
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -96,20 +98,16 @@ public class HomeStreamFragment extends Fragment {
         mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                // Refresh items in list
                 mSwipeRefreshLayout.setRefreshing(true);
                 refreshItems();
             }
         });
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        mRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(mLayoutManager) {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (newState == RecyclerView.SCROLL_STATE_SETTLING) {
-                    getMoreItems();
-                }
+            public void onLoadMore(int page, int totalItemsCount) {
+                // Paging already handled by API, no need to pass arguments
+                getMoreItems();
             }
         });
 
@@ -156,16 +154,15 @@ public class HomeStreamFragment extends Fragment {
      * home stream.
      */
     private void refreshItems() {
-        // TODO: Redesign to check if updated list is equivalent, in that case don't clear the data
         mSounds.clear();
+        mAdapter.notifyDataSetChanged();
 
         String url;
         if (updatedListLink == null) {
             url = NetworkManager.BASE_URL + "/me/activities/tracks/affiliated"
                     + "?oauth_token=" + session.getTokenAccess()
                     + "&limit=" + pageSize;
-        }
-        else {
+        } else {
             url = updatedListLink + "&oauth_token=" + session.getTokenAccess();
         }
 
@@ -228,6 +225,7 @@ public class HomeStreamFragment extends Fragment {
 
     /**
      * Parses the response for sounds and adds them to the recycler view adapter.
+     *
      * @param response The JSONObject response returned by the SoundCloud API
      */
     private void parseResponseAndAppendSounds(JSONObject response) {
@@ -281,17 +279,11 @@ public class HomeStreamFragment extends Fragment {
                 // Check for null values and replace with valid type, or find in alternate location
                 if (sound.artworkUrl.equals("null")) {
                     sound.artworkUrl = "";
-                    Log.d("DEBUG", "changed artworkUrl to empty string");
                 }
 
                 soundBuffer.add(sound);
             }
-        }
-        catch (NullPointerException e) {
-            Log.e("JsonParse", "Null came up!");
-            e.printStackTrace();
-        }
-        catch (JSONException e) {
+        } catch (JSONException e) {
             Log.e("JsonParse", "Unable to parse new JSON data");
             e.printStackTrace();
 
@@ -301,6 +293,8 @@ public class HomeStreamFragment extends Fragment {
 
         if (!isError) {
             mSounds.addAll(soundBuffer);
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
+

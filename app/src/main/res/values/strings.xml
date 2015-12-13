@@ -23,5 +23,14 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- AccountFragment -->
+    <string name="account_view_profile">View Public Profile</string>
+    <string name="account_explore">Explore</string>
+    <string name="account_activity">Activity</string>
+    <string name="account_record">Record</string>
+    <string name="account_notify_settings">Notification Settings</string>
+    <string name="account_basic_settings">Basic Settings</string>
+    <string name="account_help_center">Help Center</string>
+    <string name="account_legal">Legal</string>
     <string name="account_sign_out">Sign out</string>
+    <string name="app_version">App Version 0.1.0</string>
 </resources>

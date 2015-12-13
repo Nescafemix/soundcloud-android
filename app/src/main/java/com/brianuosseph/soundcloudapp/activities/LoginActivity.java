@@ -1,4 +1,4 @@
-package com.brianuosseph.soundcloudapp;
+package com.brianuosseph.soundcloudapp.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -36,6 +36,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.RequestFuture;
+import com.brianuosseph.soundcloudapp.NetworkManager;
+import com.brianuosseph.soundcloudapp.R;
+import com.brianuosseph.soundcloudapp.SessionManager;
 import com.soundcloud.api.ApiWrapper;
 import com.soundcloud.api.Token;
 

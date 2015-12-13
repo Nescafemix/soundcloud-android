@@ -1,10 +1,13 @@
 package com.brianuosseph.soundcloudapp.adapters;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.android.volley.toolbox.ImageLoader;
@@ -104,6 +107,7 @@ public class RecyclerHomeStreamSoundAdapter
         public final TextView mDurationView;
         public final TextView mStatusView;
         public final NetworkImageView mArtworkView;
+        public final ImageView mPopupMenuView;
 
         public Sound mSound;
 
@@ -115,6 +119,14 @@ public class RecyclerHomeStreamSoundAdapter
             mDurationView = (TextView) view.findViewById(R.id.sound_duration);
             mStatusView = (TextView) view.findViewById(R.id.sound_status);
             mArtworkView = (NetworkImageView) view.findViewById(R.id.sound_art);
+            mPopupMenuView = (ImageView) view.findViewById(R.id.sound_popup_menu);
+
+            mPopupMenuView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPopupMenu(v);
+                }
+            });
         }
 
         @Override
@@ -130,6 +142,25 @@ public class RecyclerHomeStreamSoundAdapter
             }
 
             return json.toString();
+        }
+
+        private void showPopupMenu(View view) {
+            PopupMenu popup = new PopupMenu(view.getContext(), view);
+            popup.getMenuInflater().inflate(R.menu.popup_sound, popup.getMenu());
+
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem item) {
+                    // TODO: Create actions, and/or remove unsupported actions
+                    switch (item.getItemId()) {
+                        case R.id.menu_sound_like:
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+            });
+            popup.show();
         }
     }
 

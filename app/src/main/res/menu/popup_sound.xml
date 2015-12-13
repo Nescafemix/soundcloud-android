@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menu_sound_like"
+        android:title="@string/action_like"/>
+    <item android:id="@+id/menu_sound_share"
+        android:title="@string/action_share"/>
+    <item android:id="@+id/menu_sound_repost"
+        android:title="@string/action_repost"/>
+    <item android:id="@+id/menu_sound_play_related"
+        android:title="@string/action_play_related"/>
+    <item android:id="@+id/menu_sound_playlist_add"
+        android:title="@string/action_add_to_playlist"/>
+</menu>

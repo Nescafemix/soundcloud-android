@@ -19,6 +19,13 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <!-- Sound context menu actions -->
+    <string name="action_like">Like</string>
+    <string name="action_share">Share</string>
+    <string name="action_repost">Repost</string>
+    <string name="action_play_related">Play related tracks</string>
+    <string name="action_add_to_playlist">Add to playlist</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

@@ -17,6 +17,8 @@ import com.brianuosseph.soundcloudapp.R;
 import com.brianuosseph.soundcloudapp.fragments.HomeStreamFragment.OnHomeStreamListFragmentInteractionListener;
 import com.brianuosseph.soundcloudapp.model.Sound;
 import com.brianuosseph.soundcloudapp.model.Track;
+import com.joanzapata.iconify.IconDrawable;
+import com.joanzapata.iconify.fonts.MaterialIcons;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -120,6 +122,9 @@ public class RecyclerHomeStreamSoundAdapter
             mStatusView = (TextView) view.findViewById(R.id.sound_status);
             mArtworkView = (NetworkImageView) view.findViewById(R.id.sound_art);
             mPopupMenuView = (ImageView) view.findViewById(R.id.sound_popup_menu);
+
+            mPopupMenuView.setImageDrawable(
+                    new IconDrawable(view.getContext(), MaterialIcons.md_more_vert).sizeDp(16));
 
             mPopupMenuView.setOnClickListener(new View.OnClickListener() {
                 @Override
